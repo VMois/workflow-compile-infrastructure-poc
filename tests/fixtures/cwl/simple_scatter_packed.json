@@ -1,0 +1,53 @@
+{
+    "$graph": [
+        {
+            "class": "CommandLineTool",
+            "baseCommand": "echo",
+            "inputs": [
+                {
+                    "type": "string",
+                    "inputBinding": {
+                        "position": 1
+                    },
+                    "id": "#1st-tool.cwl/message"
+                }
+            ],
+            "outputs": [],
+            "id": "#1st-tool.cwl"
+        },
+        {
+            "class": "Workflow",
+            "requirements": [
+                {
+                    "class": "ScatterFeatureRequirement"
+                }
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "id": "#main/message_array"
+                }
+            ],
+            "steps": [
+                {
+                    "run": "#1st-tool.cwl",
+                    "scatter": "#main/echo/message",
+                    "in": [
+                        {
+                            "source": "#main/message_array",
+                            "id": "#main/echo/message"
+                        }
+                    ],
+                    "out": [],
+                    "id": "#main/echo"
+                }
+            ],
+            "outputs": [],
+            "id": "#main"
+        }
+    ],
+    "cwlVersion": "v1.0"
+}

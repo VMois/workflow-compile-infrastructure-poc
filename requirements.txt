@@ -1,0 +1,1 @@
+graph-tool==2.43 # install via conda
